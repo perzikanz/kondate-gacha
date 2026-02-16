@@ -3,12 +3,7 @@
 import { Gacha } from "@/features/gacha/components/Gacha";
 
 const Home = () => {
-  return (
-    <>
-      <h1>Hello!</h1>
-      <Gacha />
-    </>
-  );
+  return <Gacha />;
 };
 
 export default Home;
