@@ -1,3 +1,5 @@
+"use client";
+
 import { FC, useCallback, useState } from "react";
 import { GachaButton } from "./GachaButton";
 import { GachaResult } from "./GachaResult";
