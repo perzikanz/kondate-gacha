@@ -1,21 +1,16 @@
 "use client";
 
 import { FC, useCallback, useState } from "react";
+import { dummyRecipes } from "../data/dummyRecipes";
+import { Recipe } from "../types/recipeData";
+import { generateWeeklyDinner } from "../utils/generateWeeklyDinner";
 import { GachaButton } from "./GachaButton";
 import { GachaResult } from "./GachaResult";
 
 export const Gacha: FC = () => {
-  const [items, setItems] = useState<string[] | null>(null);
+  const [items, setItems] = useState<Recipe[] | null>(null);
   const handleClick = useCallback(() => {
-    setItems([
-      "月: 鶏",
-      "火: 豚",
-      "水: 魚",
-      "木: 卵",
-      "金: 豆腐",
-      "土: その他",
-      "日: 鶏",
-    ]);
+    setItems(generateWeeklyDinner(dummyRecipes));
   }, []);
 
   return (
