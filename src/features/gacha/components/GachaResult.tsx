@@ -8,8 +8,8 @@ type Props = {
 };
 
 export const GachaResult: FC<Props> = ({ items }) => {
-  return items.map((recipe, index) => {
-    const day = DAYS[index];
+  return items.map((recipe, i) => {
+    const day = DAYS[i];
     return (
       <p key={recipe.id}>
         {day}：{recipe.url ? <a href={recipe.url}>{recipe.title}</a> : recipe.title}
