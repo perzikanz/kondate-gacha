@@ -28,7 +28,7 @@ const pickRandom = <T>(array: T[]): T | undefined => {
  * 4) 全部緩める（最後の手段）
  */
 export const generateWeeklyDinner = (recipes: Recipe[]): Recipe[] => {
-  const pool = recipes.filter((r) => !r.isFallback);
+  const pool = recipes.filter((recipe) => !recipe.isFallback);
   if (pool.length === 0) return [];
 
   const result: Recipe[] = [];
@@ -47,20 +47,23 @@ export const generateWeeklyDinner = (recipes: Recipe[]): Recipe[] => {
     // 4: すべて緩める（完全ランダム）
     let picked: Recipe | null = null;
 
+    // すでに選んだレシピは除外（重複防止）
+    const remaining = pool.filter((recipe) => !result.includes(recipe));
+
     for (let relax = 0; relax <= 4 && !picked; relax++) {
-      const candidates = pool.filter((r) => {
+      const candidates = remaining.filter((recipe) => {
         // 連続禁止
-        if (relax === 0 || relax === 2 || relax === 3) {
-          if (prevTag && r.mainTag === prevTag) return false;
+        if (relax < 1) {
+          if (prevTag && recipe.mainTag === prevTag) return false;
         }
         // 魚上限
-        if (relax <= 1) {
-          if (r.mainTag === "魚" && fishCount >= MAX_FISH_PER_WEEK)
+        if (relax < 2) {
+          if (recipe.mainTag === "魚" && fishCount >= MAX_FISH_PER_WEEK)
             return false;
         }
         // 揚げ物上限
-        if (relax <= 2) {
-          if (r.isFried && friedCount >= MAX_FRIED_PER_WEEK) return false;
+        if (relax < 3) {
+          if (recipe.isFried && friedCount >= MAX_FRIED_PER_WEEK) return false;
         }
         return true;
       });
@@ -69,8 +72,8 @@ export const generateWeeklyDinner = (recipes: Recipe[]): Recipe[] => {
     }
 
     // それでも取れない場合（レシピ数が少なすぎるなど）
-    // 最後の手段で pool からランダム
-    if (!picked) picked = pickRandom(pool) ?? null;
+    // 最後の手段で remaining からランダム
+    if (!picked) picked = pickRandom(remaining) ?? null;
     if (!picked) break;
 
     result.push(picked);
