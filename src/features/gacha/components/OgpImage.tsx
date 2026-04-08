@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 
 type Props = {
   recipeUrl: string;
@@ -29,7 +28,7 @@ export const OgpImage = ({ recipeUrl, recipeTitle }: Props) => {
       <img
         src={imageUrl}
         alt={recipeTitle}
-        className="object-cover rounded-t-xl"
+        className="w-full h-full object-cover rounded-t-xl"
       />
     </div>
   );

@@ -8,7 +8,7 @@ type Props = {
 
 export const GachaButton: FC<Props> = ({ handleClick }) => {
   return (
-    <div className="flex justify-center pt-8 pb-6">
+    <div className="flex justify-center pt-8 pb-8">
       <Button
         onClick={handleClick}
         className="h-14 px-10 text-lg font-bold rounded-full bg-amber-500 hover:bg-amber-400 text-white shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 active:scale-95 active:shadow-md bg-clip-border"
