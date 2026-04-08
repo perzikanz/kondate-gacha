@@ -20,7 +20,15 @@ export const OgpImage = ({ recipeUrl, recipeTitle }: Props) => {
   }, [recipeUrl]);
 
   if (!recipeUrl || imageUrl === null) {
-    return <div className="w-full h-40 bg-gray-200 rounded-t-xl" />;
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "160px",
+          backgroundColor: "var(--gacha-parchment)",
+        }}
+      />
+    );
   }
 
   return (

@@ -128,3 +128,39 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* === 献立ガチャ デザイントークン === */
+:root {
+  --gacha-cream: #F7F1E3;
+  --gacha-parchment: #EDE5D0;
+  --gacha-charcoal: #1C1A17;
+  --gacha-vermillion: #C94B1C;
+  --gacha-gold: #C9922A;
+  --gacha-card: #FFFDF8;
+  --gacha-border: #DDD5C0;
+  --gacha-muted: #8A7B6A;
+}
+
+/* === アニメーション === */
+@keyframes gacha-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes gacha-button-spin {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(0.94); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes gacha-pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(201, 75, 28, 0.35); }
+  70%  { box-shadow: 0 0 0 16px rgba(201, 75, 28, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(201, 75, 28, 0); }
+}
