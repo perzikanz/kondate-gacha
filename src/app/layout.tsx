@@ -26,103 +26,28 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${notoSansJP.variable} ${shipporiMincho.variable} min-h-dvh grid grid-rows-[auto_1fr_auto]`}
-        style={{ backgroundColor: "var(--gacha-cream)", fontFamily: "var(--font-noto-sans-jp)" }}
+        className={`${notoSansJP.variable} ${shipporiMincho.variable} min-h-dvh grid grid-rows-[auto_1fr_auto] bg-gacha-cream font-[family-name:var(--font-noto-sans-jp)]`}
       >
-        {/* ヘッダー */}
-        <header
-          style={{
-            backgroundColor: "#2E1D0E",
-            padding: "28px 24px 24px",
-          }}
-        >
-          {/* 装飾ライン */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "12px",
-              marginBottom: "16px",
-            }}
-          >
-            <div style={{ height: "1px", flex: 1, backgroundColor: "rgba(201,146,42,0.5)" }} />
-            <span
-              style={{
-                color: "#C9922A",
-                fontSize: "10px",
-                letterSpacing: "0.28em",
-                fontFamily: "var(--font-noto-sans-jp)",
-              }}
-            >
-              ※ 夕食の献立 ※
-            </span>
-            <div style={{ height: "1px", flex: 1, backgroundColor: "rgba(201,146,42,0.5)" }} />
+        <header className="bg-[#2E1D0E] px-6 pt-7 pb-6">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-px flex-1 bg-gacha-gold opacity-50" />
+            <span className="text-gacha-gold text-[10px] tracking-[0.28em]">※ 夕食の献立 ※</span>
+            <div className="h-px flex-1 bg-gacha-gold opacity-50" />
           </div>
-
-          {/* タイトル */}
-          <h1
-            style={{
-              fontFamily: "var(--font-shippori-mincho)",
-              color: "var(--gacha-cream)",
-              fontSize: "clamp(2rem, 7vw, 3.75rem)",
-              fontWeight: 800,
-              letterSpacing: "0.22em",
-              textAlign: "center",
-              lineHeight: 1,
-              margin: 0,
-            }}
-          >
+          <h1 className="font-[family-name:var(--font-shippori-mincho)] text-gacha-cream text-[clamp(2rem,7vw,3.75rem)] font-extrabold tracking-[0.22em] text-center leading-none m-0">
             献立ガチャ
           </h1>
-
-          {/* サブタイトル */}
-          <p
-            style={{
-              color: "rgba(201,146,42,0.9)",
-              fontSize: "11px",
-              letterSpacing: "0.2em",
-              textAlign: "center",
-              marginTop: "10px",
-              marginBottom: 0,
-              fontFamily: "var(--font-noto-sans-jp)",
-            }}
-          >
+          <p className="text-gacha-gold/90 text-[11px] tracking-[0.2em] text-center mt-2.5 mb-0">
             KONDATE GACHA — 今週の夕食をランダムに決める
           </p>
         </header>
 
-        {/* メインコンテンツ */}
-        <main
-          style={{
-            width: "100%",
-            maxWidth: "960px",
-            margin: "0 auto",
-            padding: "40px 16px",
-          }}
-        >
+        <main className="w-full max-w-[960px] mx-auto px-4 py-10">
           {children}
         </main>
 
-        {/* フッター */}
-        <footer
-          style={{
-            backgroundColor: "#2E1D0E",
-            height: "56px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <span
-            style={{
-              color: "rgba(201,146,42,0.7)",
-              fontSize: "10px",
-              letterSpacing: "0.18em",
-              fontFamily: "var(--font-noto-sans-jp)",
-            }}
-          >
-            ※ 献立ガチャ ※
-          </span>
+        <footer className="bg-[#2E1D0E] h-14 flex items-center justify-center">
+          <span className="text-gacha-gold/70 text-[10px] tracking-[0.18em]">※ 献立ガチャ ※</span>
         </footer>
       </body>
     </html>

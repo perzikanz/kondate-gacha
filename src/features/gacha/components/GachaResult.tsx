@@ -4,15 +4,14 @@ import { OgpImage } from "./OgpImage";
 
 const DAYS = ["月", "火", "水", "木", "金", "土", "日"];
 
-// 曜日ごとにアースカラーで差別化
 const DAY_BADGE_COLORS = [
-  "#D4774A", // 月: テラコッタ
-  "#C94B1C", // 火: 朱
-  "#4A8B7A", // 水: セージティール
-  "#6B8B4A", // 木: オリーブ
-  "#C9922A", // 金: ゴールド
-  "#7B6B9E", // 土: モーブ
-  "#B54B62", // 日: クリムゾンローズ
+  "#D4774A", // 月
+  "#C94B1C", // 火
+  "#4A8B7A", // 水
+  "#6B8B4A", // 木
+  "#C9922A", // 金
+  "#7B6B9E", // 土
+  "#B54B62", // 日
 ];
 
 type Props = {
@@ -21,142 +20,47 @@ type Props = {
 
 export const GachaResult: FC<Props> = ({ items }) => {
   return (
-    <div style={{ width: "100%" }}>
-      {/* 区切り装飾 */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "12px",
-          marginBottom: "24px",
-        }}
-      >
-        <div style={{ height: "1px", flex: 1, backgroundColor: "var(--gacha-border)" }} />
-        <span
-          style={{
-            color: "var(--gacha-muted)",
-            fontSize: "11px",
-            letterSpacing: "0.2em",
-            fontFamily: "var(--font-shippori-mincho)",
-            fontWeight: 700,
-          }}
-        >
+    <div className="w-full">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="h-px flex-1 bg-gacha-border" />
+        <span className="font-[family-name:var(--font-shippori-mincho)] font-bold text-[11px] tracking-[0.2em] text-gacha-muted">
           今週の献立
         </span>
-        <div style={{ height: "1px", flex: 1, backgroundColor: "var(--gacha-border)" }} />
+        <div className="h-px flex-1 bg-gacha-border" />
       </div>
 
-      {/* カードグリッド */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(190px, 1fr))",
-          gap: "16px",
-        }}
-      >
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {items.map((recipe, i) => (
           <div
             key={recipe.id}
-            style={{
-              backgroundColor: "var(--gacha-card)",
-              border: "1px solid var(--gacha-border)",
-              borderRadius: "14px",
-              overflow: "hidden",
-              boxShadow: "0 2px 10px rgba(28,26,23,0.06), 0 1px 3px rgba(28,26,23,0.04)",
-              animation: "gacha-card-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both",
-              animationDelay: `${i * 75}ms`,
-              transition: "transform 0.2s ease, box-shadow 0.2s ease",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLDivElement).style.transform = "translateY(-5px)";
-              (e.currentTarget as HTMLDivElement).style.boxShadow =
-                "0 10px 28px rgba(28,26,23,0.13), 0 2px 8px rgba(28,26,23,0.06)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
-              (e.currentTarget as HTMLDivElement).style.boxShadow =
-                "0 2px 10px rgba(28,26,23,0.06), 0 1px 3px rgba(28,26,23,0.04)";
-            }}
+            className="bg-gacha-card border border-gacha-border rounded-[14px] overflow-hidden shadow-gacha-card hover:shadow-gacha-card-hover hover:-translate-y-1 transition-all duration-200 animate-gacha-card-in"
+            style={{ animationDelay: `${i * 75}ms` }}
           >
             <OgpImage recipeUrl={recipe.url} recipeTitle={recipe.title} />
 
-            <div
-              style={{
-                padding: "12px 14px 16px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "7px",
-              }}
-            >
-              {/* 曜日バッジ */}
+            <div className="flex flex-col gap-1.5 px-3.5 pt-3 pb-4">
               <span
-                style={{
-                  backgroundColor: DAY_BADGE_COLORS[i],
-                  color: "#F7F1E3",
-                  fontSize: "11px",
-                  fontWeight: 700,
-                  fontFamily: "var(--font-shippori-mincho)",
-                  padding: "3px 11px",
-                  borderRadius: "999px",
-                  letterSpacing: "0.06em",
-                  display: "inline-block",
-                  width: "fit-content",
-                }}
+                className="text-gacha-cream text-[11px] font-bold font-[family-name:var(--font-shippori-mincho)] px-2.5 py-0.5 rounded-full tracking-[0.06em] w-fit"
+                style={{ backgroundColor: DAY_BADGE_COLORS[i] }}
               >
                 {DAYS[i]}曜日
               </span>
 
-              {/* レシピ名 */}
-              <p
-                style={{
-                  color: "var(--gacha-charcoal)",
-                  fontSize: "14px",
-                  fontWeight: 700,
-                  lineHeight: 1.45,
-                  fontFamily: "var(--font-shippori-mincho)",
-                  margin: 0,
-                }}
-              >
+              <p className="font-[family-name:var(--font-shippori-mincho)] font-bold text-sm text-gacha-charcoal leading-snug m-0">
                 {recipe.title}
               </p>
 
-              {/* リンク */}
               {recipe.url ? (
                 <a
                   href={recipe.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    color: "var(--gacha-vermillion)",
-                    fontSize: "12px",
-                    textDecoration: "none",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "3px",
-                    letterSpacing: "0.02em",
-                    opacity: 0.8,
-                    transition: "opacity 0.15s ease",
-                    fontFamily: "var(--font-noto-sans-jp)",
-                  }}
-                  onMouseEnter={(e) =>
-                    ((e.currentTarget as HTMLAnchorElement).style.opacity = "1")
-                  }
-                  onMouseLeave={(e) =>
-                    ((e.currentTarget as HTMLAnchorElement).style.opacity = "0.8")
-                  }
+                  className="text-gacha-vermillion text-xs opacity-80 hover:opacity-100 transition-opacity no-underline"
                 >
                   レシピを見る →
                 </a>
               ) : (
-                <span
-                  style={{
-                    color: "var(--gacha-muted)",
-                    fontSize: "12px",
-                    opacity: 0.7,
-                  }}
-                >
-                  URLなし
-                </span>
+                <span className="text-gacha-muted text-xs opacity-70">URLなし</span>
               )}
             </div>
           </div>

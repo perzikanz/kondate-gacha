@@ -21,7 +21,7 @@ export const Gacha: FC = () => {
   }, [isSpinning]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "40px" }}>
+    <div className="flex flex-col items-center gap-10">
       <GachaButton handleClick={handleClick} isSpinning={isSpinning} />
       {items && <GachaResult key={animationKey} items={items} />}
     </div>
