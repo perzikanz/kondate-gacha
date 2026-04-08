@@ -26,10 +26,9 @@ export const OgpImage = ({ recipeUrl, recipeTitle }: Props) => {
 
   return (
     <div className="relative w-full h-40">
-      <Image
+      <img
         src={imageUrl}
         alt={recipeTitle}
-        fill
         className="object-cover rounded-t-xl"
       />
     </div>
