@@ -28,7 +28,7 @@ export default function RootLayout({
       <body
         className={`${notoSansJP.variable} ${shipporiMincho.variable} min-h-dvh grid grid-rows-[auto_1fr_auto] bg-gacha-cream font-[family-name:var(--font-noto-sans-jp)]`}
       >
-        <header className="bg-[#2E1D0E] px-6 pt-7 pb-6">
+        <header className="bg-gacha-dark px-6 pt-7 pb-6">
           <div className="flex items-center gap-3 mb-4">
             <div className="h-px flex-1 bg-gacha-gold opacity-50" />
             <span className="text-gacha-gold text-[10px] tracking-[0.28em]">※ 夕食の献立 ※</span>
@@ -46,7 +46,7 @@ export default function RootLayout({
           {children}
         </main>
 
-        <footer className="bg-[#2E1D0E] h-14 flex items-center justify-center">
+        <footer className="bg-gacha-dark h-14 flex items-center justify-center">
           <span className="text-gacha-gold/70 text-[10px] tracking-[0.18em]">※ 献立ガチャ ※</span>
         </footer>
       </body>
