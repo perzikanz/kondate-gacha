@@ -32,7 +32,7 @@ export default function RootLayout({
         {/* ヘッダー */}
         <header
           style={{
-            backgroundColor: "var(--gacha-charcoal)",
+            backgroundColor: "#2E1D0E",
             padding: "28px 24px 24px",
           }}
         >
@@ -106,7 +106,7 @@ export default function RootLayout({
         {/* フッター */}
         <footer
           style={{
-            backgroundColor: "var(--gacha-charcoal)",
+            backgroundColor: "#2E1D0E",
             height: "56px",
             display: "flex",
             alignItems: "center",
