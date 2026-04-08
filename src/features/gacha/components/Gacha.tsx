@@ -9,14 +9,21 @@ import { GachaResult } from "./GachaResult";
 
 export const Gacha: FC = () => {
   const [items, setItems] = useState<Recipe[] | null>(null);
+  const [isSpinning, setIsSpinning] = useState(false);
+  const [animationKey, setAnimationKey] = useState(0);
+
   const handleClick = useCallback(() => {
+    if (isSpinning) return;
+    setIsSpinning(true);
     setItems(generateWeeklyDinner(dummyRecipes));
-  }, []);
+    setAnimationKey((prev) => prev + 1);
+    setTimeout(() => setIsSpinning(false), 700);
+  }, [isSpinning]);
 
   return (
-    <>
-      <GachaButton handleClick={handleClick} />
-      {items && <GachaResult items={items} />}
-    </>
+    <div className="flex flex-col items-center gap-10">
+      <GachaButton handleClick={handleClick} isSpinning={isSpinning} />
+      {items && <GachaResult key={animationKey} items={items} />}
+    </div>
   );
 };
