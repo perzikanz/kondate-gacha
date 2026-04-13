@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP, Shippori_Mincho } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const notoSansJP = Noto_Sans_JP({
@@ -49,6 +50,7 @@ export default function RootLayout({
         <footer className="bg-gacha-dark h-14 flex items-center justify-center">
           <span className="text-gacha-gold/70 text-[10px] tracking-[0.18em]">※ 献立ガチャ ※</span>
         </footer>
+        <Analytics />
       </body>
     </html>
   );
