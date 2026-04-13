@@ -9,7 +9,7 @@ const ALLOWED_RECIPE_HOSTS = [
   "www.nisshin-seifun-welna.com",
 ];
 
-function isAllowedUrl(urlString: string): boolean {
+const isAllowedUrl = (urlString: string): boolean => {
   try {
     const parsedUrl = new URL(urlString);
     // httpとhttpsのみ許可（file://やその他プロトコルを排除）
@@ -20,9 +20,16 @@ function isAllowedUrl(urlString: string): boolean {
   } catch {
     return false;
   }
-}
+};
 
-export async function GET(request: NextRequest) {
+const extractOgpImageUrl = (html: string): string | null => {
+  const match =
+    html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i) ??
+    html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
+  return match?.[1] ?? null;
+};
+
+export const GET = async (request: NextRequest) => {
   const recipeUrl = request.nextUrl.searchParams.get("url");
 
   if (!recipeUrl) {
@@ -51,11 +58,4 @@ export async function GET(request: NextRequest) {
   } catch {
     return NextResponse.json({ imageUrl: null });
   }
-}
-
-function extractOgpImageUrl(html: string): string | null {
-  const match =
-    html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i) ??
-    html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
-  return match?.[1] ?? null;
-}
+};
