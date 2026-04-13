@@ -41,6 +41,12 @@ export async function GET(request: NextRequest) {
 
     const html = await response.text();
     const imageUrl = extractOgpImageUrl(html);
+
+    // 抽出したURLがhttpまたはhttpsで始まるか確認（javascript:等を排除）
+    if (imageUrl && !imageUrl.startsWith("http://") && !imageUrl.startsWith("https://")) {
+      return NextResponse.json({ imageUrl: null });
+    }
+
     return NextResponse.json({ imageUrl });
   } catch {
     return NextResponse.json({ imageUrl: null });
