@@ -1,10 +1,36 @@
 import { NextRequest, NextResponse } from "next/server";
 
+// OGP取得を許可するレシピサイトのホスト名一覧
+const ALLOWED_RECIPE_HOSTS = [
+  "www.sirogohan.com",
+  "www.kikkoman.co.jp",
+  "park.ajinomoto.co.jp",
+  "housefoods.jp",
+  "www.nisshin-seifun-welna.com",
+];
+
+function isAllowedUrl(urlString: string): boolean {
+  try {
+    const parsedUrl = new URL(urlString);
+    // httpとhttpsのみ許可（file://やその他プロトコルを排除）
+    if (parsedUrl.protocol !== "http:" && parsedUrl.protocol !== "https:") {
+      return false;
+    }
+    return ALLOWED_RECIPE_HOSTS.includes(parsedUrl.hostname);
+  } catch {
+    return false;
+  }
+}
+
 export async function GET(request: NextRequest) {
   const recipeUrl = request.nextUrl.searchParams.get("url");
 
   if (!recipeUrl) {
     return NextResponse.json({ imageUrl: null }, { status: 400 });
+  }
+
+  if (!isAllowedUrl(recipeUrl)) {
+    return NextResponse.json({ imageUrl: null }, { status: 403 });
   }
 
   try {
